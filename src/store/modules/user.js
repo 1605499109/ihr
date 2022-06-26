@@ -1,12 +1,14 @@
-import { login, logout, getInfo } from '@/api/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { login, logout, getInfo, getUserInfo } from '@/api/user'
+import { getToken, setToken, removeToken, settimeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
+// import { get } from 'core-js/core/dict'
 
 const getDefaultState = () => {
   return {
     token: getToken(),
     name: '',
-    avatar: ''
+    avatar: '',
+    userDetali: {}
   }
 }
 
@@ -24,18 +26,26 @@ const mutations = {
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
+  },
+  SET_USER_DETAIL: (state, userDetali) => {
+    state.userDetali = userDetali
   }
 }
 
 const actions = {
   // user login
   login({ commit }, userInfo) {
+    // console.log(userInfo)
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
+      login({ mobile: username.trim(), password: password }).then(response => {
         const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
+        console.log(data)
+        commit('SET_TOKEN', data)
+        setToken(data)
+        const time = Date.now()
+        settimeToken(time)
+
         resolve()
       }).catch(error => {
         reject(error)
@@ -43,25 +53,31 @@ const actions = {
     })
   },
 
-  // get user info
-  getInfo({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      getInfo(state.token).then(response => {
-        const { data } = response
+  // get user
+  // 获取用户信息
+  async  getInfo({ commit, state }) {
+    const { data: userInfo } = await getInfo()
+    const { data: userDetali } = await getUserInfo(userInfo.userId)
+    commit('SET_USER_DETAIL', { ...userInfo, ...userDetali }) // 合并用户信息
+    console.log(state.userDetali)
+    // console.log(11111, userDetali)
+    // return new Promise((resolve, reject) => {
+    //   getInfo(state.token).then(response => {
+    //     const { data } = response
 
-        if (!data) {
-          return reject('Verification failed, please Login again.')
-        }
+    //     if (!data) {
+    //       return reject('Verification failed, please Login again.')
+    //     }
 
-        const { name, avatar } = data
+    //     const { name, avatar } = data
 
-        commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
-        resolve(data)
-      }).catch(error => {
-        reject(error)
-      })
-    })
+    //     commit('SET_NAME', name)
+    //     commit('SET_AVATAR', avatar)
+    //     resolve(data)
+    //   }).catch(error => {
+    //     reject(error)
+    //   })
+    // })
   },
 
   // user logout

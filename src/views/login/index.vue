@@ -3,7 +3,9 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">
+          <img src="@/assets/common/login-logo.png" alt="">
+        </h3>
       </div>
 
       <el-form-item prop="username">
@@ -44,8 +46,8 @@
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
 
       <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: any</span>
+        <span style="margin-right:20px;">账号: 13800000002</span>
+        <span>密码: 123456</span>
       </div>
 
     </el-form>
@@ -53,29 +55,29 @@
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
+// import { validUsername } from '@/utils/validate'
 
 export default {
   name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
+      if (value.length < 11) {
+        callback(new Error('手机号码格式不正确'))
       } else {
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+        callback(new Error('密码长度不够'))
       } else {
         callback()
       }
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        username: '13800000003',
+        password: '123456'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -107,6 +109,7 @@ export default {
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
+        console.log(valid)
         if (valid) {
           this.loading = true
           this.$store.dispatch('user/login', this.loginForm).then(() => {
@@ -175,7 +178,7 @@ $cursor: #fff;
 <style lang="scss" scoped>
 $bg:#2d3a4b;
 $dark_gray:#889aa4;
-$light_gray:#eee;
+ $light_gray: #68b0fe;
 
 .login-container {
   min-height: 100%;
@@ -233,5 +236,16 @@ $light_gray:#eee;
     cursor: pointer;
     user-select: none;
   }
+}
+.login-container {
+  background-image: url('~@/assets/common/login.jpg'); // 设置背景图片
+  background-position: center; // 将图片位置设置为充满整个屏幕
+
+}
+.loginBtn {
+  background: #407ffe;
+  height: 64px;
+  line-height: 32px;
+  font-size: 24px;
 }
 </style>

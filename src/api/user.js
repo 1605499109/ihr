@@ -2,18 +2,25 @@ import request from '@/utils/request'
 
 export function login(data) {
   return request({
-    url: '/vue-admin-template/user/login',
+    url: '/sys/login',
     method: 'post',
     data
   })
 }
-
-export function getInfo(token) {
+// 用户基本信息
+export function getInfo() {
   return request({
-    url: '/vue-admin-template/user/info',
-    method: 'get',
-    params: { token }
+    url: '/sys/profile',
+    method: 'post'
+
   })
+}
+// 用户详细信息
+export function getUserInfo(id) {
+  return request({
+    url: `/sys/user/${id}`,
+    method: 'get',
+    params: { id }})
 }
 
 export function logout() {

@@ -318,7 +318,7 @@ export default {
     },
     // 查看跳转
     routersee(index, row) {
-      this.$router.push({ name: 'userinfo', query: { id: row.id }})
+      this.$router.push({ name: 'details', query: { id: row.id }})
     },
     inputupload() {
       this.$router.push({ name: 'fileupload', query: { type: 'user' }})

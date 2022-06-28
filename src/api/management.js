@@ -12,3 +12,5 @@ export const userinfo = (id) => request.get(`sys/user/${id}`)
 export const rolelist = () => request.get('/sys/role')
 // 分配角色
 export const putrole = (obj) => request.put('/sys/user/assignRoles', obj)
+// 获取岗位信息
+export const gtejob = (id) => request.get(`/employees/${id}/jobs`)

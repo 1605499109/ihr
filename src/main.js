@@ -14,7 +14,10 @@ import router from './router'
 
 import '@/icons' // icon
 import '@/permission' // permission control
-
+import TagsView from '@/components/TagsView'
+import Print from 'vue-print-nb'
+Vue.use(Print)
+Vue.component('TagsView', TagsView)
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api

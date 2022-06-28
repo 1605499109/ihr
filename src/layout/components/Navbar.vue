@@ -9,6 +9,8 @@
     <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
+      <screen-full class="right-menu-item" />
+      <theme-picker class="right-menu-item" />
       <lang-select class="right-menu-item" />
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
@@ -42,11 +44,15 @@ import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import LangSelect from '@/components/lang/index.vue'
+import ScreenFull from '@/components/screenFull/index.vue'
+import ThemePicker from '@/components/ThemePicker/index.vue'
 export default {
   components: {
     Breadcrumb,
     Hamburger,
-    LangSelect
+    LangSelect,
+    ScreenFull,
+    ThemePicker
   },
   computed: {
     ...mapGetters([
@@ -180,4 +186,7 @@ export default {
    .user-dropdown {
            color: #fff;
     }
+    .right-menu-item {
+   vertical-align: middle;
+}
 </style>

@@ -79,6 +79,13 @@
             />
           </el-form-item>
         </el-col>
+        <el-row type="flex" justify="end">
+          <el-tooltip content="打印个人基本信息">
+            <router-link :to="`/management/print/${firsetata.id}?type=personal`">
+              <i class="el-icon-printer" />
+            </router-link>
+          </el-tooltip>
+        </el-row>
       </el-row>
       <!-- 保存个人信息 -->
       <el-row class="inline-info" type="flex" justify="center">

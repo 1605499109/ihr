@@ -3,13 +3,13 @@
 import Layout from '@/layout'
 export default {
   path: '/fileupload',
-  // name: 'scocial',
+  name: 'scocial',
   component: Layout,
   children: [
     {
       path: '',
       component: () => import('@/views/management/components/FileUpload.vue'),
-      name: 'fileupload',
+      name: '',
       hidden: true,
       meta: {
         title: 'fileupload'

@@ -1,17 +1,18 @@
 // 社保
 import Layout from '@/layout'
 export default {
-  path: '/scocial',
-  name: 'scocial',
+  path: '/detail',
+  name: 'detail',
   component: Layout,
   children: [
     {
       path: '',
-      component: () => import('@/views/scocial'),
+      component: () => import('@/views/management/DetailView.vue'),
       name: '',
+
       meta: {
-        title: '社保管理',
-        icon: 'table'
+        title: 'detail'
+
       }
     }]
 }

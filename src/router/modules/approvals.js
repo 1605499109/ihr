@@ -5,7 +5,7 @@ import Layout from '@/layout'
 // import { Icon } from 'element-ui'
 export default {
   path: '/appprovals',
-  // name: 'approvals',
+  name: 'approvals',
   component: Layout,
   children: [
     {

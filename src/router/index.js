@@ -16,9 +16,10 @@ import salarysRouter from './modules/salarys'
 import settingRouter from './modules/setting'
 import socialRouter from './modules/social'
 import management from './modules/management'
-import userinfo from './modules/userinfo'
+// import detail from './modules/detail'
 import fileupload from './modules/fileupload'
-const asyncrouters = [
+import leaveApproval from './modules/leaveApproval'
+export const asyncrouters = [
   approvalsRouter,
   departmentsRouter,
   employeesRouter,
@@ -28,7 +29,7 @@ const asyncrouters = [
   settingRouter,
   socialRouter,
   management,
-  userinfo,
+  leaveApproval,
   fileupload
 
 ]
@@ -55,16 +56,17 @@ export const constantRoutes = [
       name: 'dashboard',
       component: () => import('@/views/dashboard/index'),
       meta: { title: '主页', icon: 'dashboard' }
-    }]
-  },
+    }
 
-  { path: '*', redirect: '/404', hidden: true }
+    ]
+  }
+
 ]
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
-  routes: [...constantRoutes, ...asyncrouters]
+  routes: [...constantRoutes]
 })
 
 const router = createRouter()

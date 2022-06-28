@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <% for(var css of htmlWebpackPlugin.options.cdn.css) { %>
+      <link rel="stylesheet" href="<%=css%>">
+    <% } %>
+    <% for(var js of htmlWebpackPlugin.options.cdn.js) { %>
+      <script src="<%=js%>"></script>
+    <% } %>
     <title><%= webpackConfig.name %></title>
   </head>
   <body>

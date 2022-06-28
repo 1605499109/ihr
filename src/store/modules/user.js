@@ -1,6 +1,7 @@
-import { login, logout, getInfo, getUserInfo } from '@/api/user'
+import { login, getInfo, getUserInfo } from '@/api/user'
 import { getToken, setToken, removeToken, settimeToken } from '@/utils/auth'
-import { resetRouter } from '@/router'
+// import { resetRouter } from '@/router'
+// import userinfo from '@/router/modules/userinfo'
 // import { get } from 'core-js/core/dict'
 
 const getDefaultState = () => {
@@ -29,7 +30,11 @@ const mutations = {
   },
   SET_USER_DETAIL: (state, userDetali) => {
     state.userDetali = userDetali
+  },
+  SETDETAIL_vuex: (state, userDetali) => {
+    state.userDetali = {}
   }
+
 }
 
 const actions = {
@@ -59,7 +64,8 @@ const actions = {
     const { data: userInfo } = await getInfo()
     const { data: userDetali } = await getUserInfo(userInfo.userId)
     commit('SET_USER_DETAIL', { ...userInfo, ...userDetali }) // 合并用户信息
-    console.log(state.userDetali)
+    return userInfo
+    // console.log(state.userDetali)
     // console.log(11111, userDetali)
     // return new Promise((resolve, reject) => {
     //   getInfo(state.token).then(response => {
@@ -82,16 +88,19 @@ const actions = {
 
   // user logout
   logout({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      logout(state.token).then(() => {
-        removeToken() // must remove  token  first
-        resetRouter()
-        commit('RESET_STATE')
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
-    })
+    // console.log(2222)
+    removeToken()
+    commit('SETDETAIL_vuex')
+    // return new Promise((resolve, reject) => {
+    //   logout(state.token).then(() => {
+    //     removeToken() // must remove  token  first
+    //     resetRouter()
+    //     commit('RESET_STATE')
+    //     resolve()
+    //   }).catch(error => {
+    //     reject(error)
+    //   })
+    // })
   },
 
   // remove token
